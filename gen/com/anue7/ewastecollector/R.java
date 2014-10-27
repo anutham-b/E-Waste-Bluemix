@@ -11,11 +11,12 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int about_text_color=0x7f040004;
         public static final int actionBarBackground=0x7f040001;
         public static final int actionBarBorder=0x7f040002;
-        public static final int background=0x7f040004;
-        public static final int divider_color=0x7f040006;
-        public static final int done_button_background=0x7f040005;
+        public static final int background=0x7f040005;
+        public static final int divider_color=0x7f040007;
+        public static final int done_button_background=0x7f040006;
         public static final int list_text_color=0x7f040003;
         public static final int white=0x7f040000;
     }
@@ -39,17 +40,27 @@ public final class R {
         public static final int text1=0x7f090001;
     }
     public static final class layout {
-        public static final int activity_home=0x7f030000;
-        public static final int add_to_inventory=0x7f030001;
-        public static final int menu_list=0x7f030002;
+        public static final int activity_about_initiative=0x7f030000;
+        public static final int activity_add_to_inventory=0x7f030001;
+        public static final int activity_collection_schedules=0x7f030002;
+        public static final int activity_home=0x7f030003;
+        public static final int menu_list=0x7f030004;
     }
     public static final class menu {
-        public static final int home=0x7f080000;
+        public static final int about_initiative=0x7f080000;
+        public static final int add_to_inventory=0x7f080001;
+        public static final int collection_schedules=0x7f080002;
+        public static final int home=0x7f080003;
     }
     public static final class string {
+        public static final int aboutInitiative_desc=0x7f060003;
         public static final int action_settings=0x7f060002;
         public static final int app_name=0x7f060000;
+        public static final int collectionSchedules_temporaryDesc=0x7f060004;
         public static final int hello_world=0x7f060001;
+        public static final int title_activity_about_initiative=0x7f060006;
+        public static final int title_activity_add_to_inventory=0x7f060005;
+        public static final int title_activity_collection_schedules=0x7f060007;
     }
     public static final class style {
         /** 

@@ -13,13 +13,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+/**
+ * The class corresponding to the Home activity(screen)
+ * 
+ */
 public class HomeActivity extends Activity {
 
 	public static final String CLASS_NAME = "HomeActivity";
 
 	private static final String TAG = "HomeActivity";
 
-	static final String[] LIST_ITEMS = new String[]{"Pledge E-waste", "Locate collection points", "Why pledge E-waste",};
+	// Currently the Home screen items are Hardcoded here.
+	static final String[] LIST_ITEMS = new String[]{"Pledge your E-waste", "Upcoming collection schedules", "Why join the initiative?",};
 
 	ArrayAdapter<HomeItem> lvArrayAdapter;
 
@@ -36,12 +41,24 @@ public class HomeActivity extends Activity {
 		lvArrayAdapter = new ArrayAdapter<HomeItem>(this, R.layout.menu_list, menuItems);
 		menuItemsLV.setAdapter(lvArrayAdapter);
 
+		/* Listener for click on the Menu item in the Home screen */
 		menuItemsLV.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
-				Log.v(TAG, "Click sensed");
+				Log.v(TAG, "Click sensed from the listItem num: " + arg2);
+				switch (arg2) {
+					case 0 :
+						startActivity(new Intent(getApplicationContext(), AddToInventoryActivity.class));
+						break;
+					case 1 :
+						startActivity(new Intent(getApplicationContext(), CollectionSchedulesActivity.class));
+						break;
+					case 2 :
+						startActivity(new Intent(getApplicationContext(), AboutInitiativeActivity.class));
+						break;
+				}
 			}
 		});
 	}

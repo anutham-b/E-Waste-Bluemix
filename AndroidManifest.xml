@@ -22,6 +22,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddToInventoryActivity"
+            android:label="@string/title_activity_add_to_inventory"
+            android:parentActivityName=".HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anue7.ewastecollector.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".AboutInitiativeActivity"
+            android:label="@string/title_activity_about_initiative"
+            android:parentActivityName=".HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anue7.ewastecollector.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".CollectionSchedulesActivity"
+            android:label="@string/title_activity_collection_schedules"
+            android:parentActivityName=".HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anue7.ewastecollector.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
