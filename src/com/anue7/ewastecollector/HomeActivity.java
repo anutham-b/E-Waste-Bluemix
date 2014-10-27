@@ -1,8 +1,5 @@
 package com.anue7.ewastecollector;
 
-import com.ibm.bluelist.BlueListApplication;
-import com.ibm.bluelist.EditActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,8 +42,6 @@ public class HomeActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				// TODO Auto-generated method stub
 				Log.v(TAG, "Click sensed");
-				Intent editIntent = new Intent(getBaseContext(), EditActivity.class);
-				startActivityForResult(editIntent, BlueListApplication.EDIT_ACTIVITY_RC);
 			}
 		});
 	}
