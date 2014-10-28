@@ -3,10 +3,14 @@
 
     <string name="app_name">E Waste Collector</string>
     <string name="hello_world">Hello world!</string>
+    <string name="label_ITEM_TYPE">Item Type</string>
+    <string name="label_ITEM_QUANTITY">Quantity</string>
+    <string name="label_ITEM_DONE">Done</string>
+    <string name="label_ITEMS_PLEDGED">Items Pledged till now</string>
     <string name="action_settings">Settings</string>
     <string name="aboutInitiative_desc">Be a part of the \'Clean India\' mission by contributing your E-Waste for scientific recycling.</string>
     <string name="collectionSchedules_temporaryDesc">Once the collection kiosks are scheduled it will be displayed here</string>
-    <string name="title_activity_add_to_inventory">Pledge you E-waste</string>
+    <string name="title_activity_add_to_inventory">Pledge your E-waste</string>
     <string name="title_activity_about_initiative">About this initiative</string>
     <string name="title_activity_collection_schedules">CollectionSchedulesActivity</string>
 

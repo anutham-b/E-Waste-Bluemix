@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -23,6 +22,8 @@ public class HomeActivity extends Activity {
 
 	private static final String TAG = "HomeActivity";
 
+	EWasteApplication eWasteApplication;
+
 	// Currently the Home screen items are Hardcoded here.
 	static final String[] LIST_ITEMS = new String[]{"Pledge your E-waste", "Upcoming collection schedules", "Why join the initiative?",};
 
@@ -32,6 +33,9 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
+
+		/* Use application class to maintain global state. */
+		eWasteApplication = (EWasteApplication) getApplication();
 
 		HomeItem[] menuItems = {new HomeItem("Pledge your e-waste"), new HomeItem("Locate nearest collection schedules"),
 				new HomeItem("Why recycle E-waste")};
