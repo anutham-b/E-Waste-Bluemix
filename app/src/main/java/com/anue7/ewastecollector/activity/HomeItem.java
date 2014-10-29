@@ -22,7 +22,7 @@ public class HomeItem {
 
 	/**
 	 * Sets the name of a menu item, as well as calls setCreationTime().
-	 * 
+	 *
 	 */
 	public void setName(String lMenuItem) {
 		menuItem = lMenuItem;
