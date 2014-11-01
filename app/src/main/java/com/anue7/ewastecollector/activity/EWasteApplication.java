@@ -21,6 +21,7 @@ public class EWasteApplication extends Application {
 	private static final String APP_ROUTE = "applicationRoute";
 	private static final String PROPS_FILE = "bluelist.properties";
 	private static final String CLASS_NAME = EWasteApplication.class.getSimpleName();
+    private ItemEntityObject itemEntityObject;
 
 	public EWasteApplication() {
 		registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
@@ -64,6 +65,7 @@ public class EWasteApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+        itemEntityObject = new ItemEntityObject();
 		// Read from properties file.
 		Properties props = new Properties();
 		Context context = getApplicationContext();
@@ -83,4 +85,13 @@ public class EWasteApplication extends Application {
 		// register the Item Specialization
 		ItemEntityObject.registerSpecialization(ItemEntityObject.class);
 	}
+
+
+    public ItemEntityObject getItemEntityObject() {
+        return itemEntityObject;
+    }
+
+    public void setItemEntityObject(ItemEntityObject obj) {
+        itemEntityObject = obj;
+    }
 }

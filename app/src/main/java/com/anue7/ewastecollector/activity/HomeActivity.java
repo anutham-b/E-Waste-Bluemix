@@ -1,6 +1,7 @@
 package com.anue7.ewastecollector.activity;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.anue7.ewastecollector.R;
+import com.anue7.ewastecollector.entity.ItemEntityObject;
+import com.ibm.mobile.services.data.IBMDataException;
+import com.ibm.mobile.services.data.IBMQuery;
+
+import java.util.List;
+
+import bolts.Continuation;
+import bolts.Task;
 
 
 /**
@@ -41,6 +50,8 @@ public class HomeActivity extends Activity {
 
 		HomeItem[] menuItems = {new HomeItem("Pledge your e-waste"), new HomeItem("Locate nearest collection schedules"),
 				new HomeItem("Why recycle E-waste")};
+
+        fetchItemsFromCloud();
 
 		/* Set up the array adapter for menu items list view. */
 		ListView menuItemsLV = (ListView) findViewById(R.id.listView1);
@@ -86,4 +97,44 @@ public class HomeActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+     /**
+     * Fetches the saved data from IBM Cloud APIs
+     *
+     * An IBMQuery is used to find all the list items.
+     */
+    public void fetchItemsFromCloud() {
+        try {
+            IBMQuery<ItemEntityObject> query = IBMQuery.queryForClass(ItemEntityObject.class);
+            // Query all the Item objects from the server.
+            query.find().continueWith(new Continuation<List<ItemEntityObject>, Void>() {
+
+                @Override
+                public Void then(Task<List<ItemEntityObject>> task) throws Exception {
+                    final List<ItemEntityObject> objects = task.getResult();
+                    // Log if the find was cancelled.
+                    if (task.isCancelled()){
+                        Log.e(CLASS_NAME, "Exception : Task " + task.toString() + " was cancelled.");
+                    }
+                    // Log error message, if the find task fails.
+                    else if (task.isFaulted()) {
+                        Log.e(CLASS_NAME, "Exception : " + task.getError().getMessage());
+                    }
+
+
+                    // If the result succeeds, load the list.
+                    else {
+                        // Clear local itemList.
+                        // We'll be reordering and repopulating from DataService.
+                        eWasteApplication.setItemEntityObject(objects.get(0));
+                    }
+                    return null;
+                }
+            },Task.UI_THREAD_EXECUTOR);
+
+        }  catch (IBMDataException error) {
+            Log.e(CLASS_NAME, "Exception : " + error.getMessage());
+        }
+    }
 }

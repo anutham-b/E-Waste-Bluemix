@@ -1,6 +1,7 @@
 package com.anue7.ewastecollector.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,11 +10,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anue7.ewastecollector.R;
 import com.anue7.ewastecollector.entity.ItemEntityObject;
+import com.anue7.ewastecollector.utilities.IdComparator;
 import com.ibm.mobile.services.data.IBMDataObject;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +35,12 @@ public class InventoryItemsActivity extends Activity {
 
     public static final String TAG = "InventoryItemsActivity";
 
-    public static final int noOfItemTypes = 7;
+    private EWasteApplication eWasteApplication;
+
+    private List<Integer> qtyColln = new ArrayList<Integer>(qtyToIdMap.values());
+
+    private List<Integer> cbColln = new ArrayList<Integer>(cbToIdMap.values());
+
 
     public static Map<String, Integer> qtyToIdMap = new HashMap<String, Integer>() {
         {
@@ -44,7 +51,6 @@ public class InventoryItemsActivity extends Activity {
             put("qty5", R.id.qty5);
             put("qty6", R.id.qty6);
             put("qty7", R.id.qty7);
-
         }
     };
 
@@ -57,7 +63,6 @@ public class InventoryItemsActivity extends Activity {
             put("checkBox5", R.id.checkBox5);
             put("checkBox6", R.id.checkBox6);
             put("checkBox7", R.id.checkBox7);
-
         }
     };
 
@@ -66,9 +71,15 @@ public class InventoryItemsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_items);
 
-        /*Initially set all quantity fields disabled */
+        Collections.sort(qtyColln, new IdComparator());
+        Collections.sort(cbColln, new IdComparator());
 
+        /*Initially set all quantity fields disabled */
         setAllQtyDisabled();
+
+        eWasteApplication = (EWasteApplication) getApplication();
+        Integer[] itemIndexes = eWasteApplication.getItemEntityObject().getItemQuantity();
+        populateInventory(itemIndexes);
     }
 
     private void setAllQtyDisabled() {
@@ -78,31 +89,21 @@ public class InventoryItemsActivity extends Activity {
         }
     }
 
-    private ArrayList<Integer> getItemQtyInfo() {
-        List<Integer> qtyColln = new ArrayList<Integer>(qtyToIdMap.values());
-        Collections.sort( qtyColln, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o, Integer o2) {
-                return (o.compareTo(o2));
-            }
-        });
-        List<Integer> cbColln = new ArrayList<Integer>(cbToIdMap.values());
-        Collections.sort( cbColln, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o, Integer o2) {
-                return (o.compareTo(o2));
-            }
-        });
+    private Integer[] getItemQtyInfo() {
+
         Iterator<Integer> qtyIterator = qtyColln.iterator();
-        Iterator<Integer>  cbIterator = cbColln.iterator();
-        ArrayList<Integer> itemQuantities = new ArrayList<Integer>();
+        Iterator<Integer> cbIterator = cbColln.iterator();
+        Integer[] itemQuantities = new Integer[ItemEntityObject.NO_OF_ITEM_TYPES];
+        int i = 0;
         while (qtyIterator.hasNext() && cbIterator.hasNext()) {
             CheckBox itemChecked = (CheckBox) findViewById(cbIterator.next().intValue());
             EditText qtyValue = (EditText) findViewById(qtyIterator.next().intValue());
             if (itemChecked.isChecked()) {
 
-                itemQuantities.add(Integer.valueOf(qtyValue.getText().toString()));
-            } else {itemQuantities.add(0);}
+                itemQuantities[i++] = (Integer.valueOf(qtyValue.getText().toString()));
+            } else {
+                itemQuantities[i++] = 0;
+            }
         }
         return itemQuantities;
     }
@@ -148,8 +149,8 @@ public class InventoryItemsActivity extends Activity {
      * Will be called upon click of 'Done' button in the form
      */
     public void doneUpdatingItems(View v) {
-        ArrayList<Integer> items= getItemQtyInfo();
-        ItemEntityObject item = new ItemEntityObject();
+        Integer[] items = getItemQtyInfo();
+        ItemEntityObject item = eWasteApplication.getItemEntityObject();
         item.setItemQuantity(items);
         item.save().continueWith(new Continuation<IBMDataObject, Void>() {
 
@@ -169,5 +170,17 @@ public class InventoryItemsActivity extends Activity {
                 return null;
             }
         });
+    }
+
+    private void populateInventory(Integer[] itemQuantities) {
+        for (int i = 0; i < ItemEntityObject.NO_OF_ITEM_TYPES; i++) {
+            CheckBox itemChecked = (CheckBox) findViewById(cbColln.get(i).intValue());
+            EditText qtyValue = (EditText) findViewById(qtyColln.get(i).intValue());
+            if (itemQuantities[i] != null && itemQuantities[i] != 0) {
+                itemChecked.setChecked(true);
+                qtyValue.setEnabled(true);
+                qtyValue.setText(String.valueOf(itemQuantities[i]));
+            }
+        }
     }
 }
