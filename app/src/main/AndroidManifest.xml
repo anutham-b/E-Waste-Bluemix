@@ -26,14 +26,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.AddToInventoryActivity"
-            android:label="@string/title_activity_add_to_inventory"
-            android:parentActivityName=".activity.HomeActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.anue7.ewastecollector.HomeActivity" />
-        </activity>
-        <activity
             android:name=".activity.AboutInitiativeActivity"
             android:label="@string/title_activity_about_initiative"
             android:parentActivityName=".activity.HomeActivity" >
@@ -48,6 +40,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.anue7.ewastecollector.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activity.InventoryItemsActivity"
+            android:label="@string/title_activity_inventory_items"
+            android:parentActivityName=".activity.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.anue7.ewastecollector.activity.HomeActivity" />
         </activity>
     </application>
 

@@ -12,7 +12,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.anue7.ewastecollector.R;
-import com.anue7.ewastecollector.activity.AboutInitiativeActivity;
 
 
 /**
@@ -57,13 +56,13 @@ public class HomeActivity extends Activity {
 				Log.v(TAG, "Click sensed from the listItem num: " + arg2);
 				switch (arg2) {
 					case 0 :
-						startActivity(new Intent(getApplicationContext(), com.anue7.ewastecollector.activity.AddToInventoryActivity.class));
+						startActivity(new Intent(getApplicationContext(), InventoryItemsActivity.class));
 						break;
 					case 1 :
-						startActivity(new Intent(getApplicationContext(), com.anue7.ewastecollector.activity.CollectionSchedulesActivity.class));
+						startActivity(new Intent(getApplicationContext(), CollectionSchedulesActivity.class));
 						break;
 					case 2 :
-						startActivity(new Intent(getApplicationContext(), com.anue7.ewastecollector.activity.AboutInitiativeActivity.class));
+						startActivity(new Intent(getApplicationContext(), AboutInitiativeActivity.class));
 						break;
 				}
 			}

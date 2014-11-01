@@ -14,5 +14,14 @@
     <string name="title_activity_about_initiative">About this initiative</string>
     <string name="title_activity_collection_schedules">CollectionSchedulesActivity</string>
     <string name="title_activity_my">MyActivity</string>
-
+    <string name="title_activity_inventory_items">Personal e-waste pledge</string>
+    <string name="ITEM_INVENTORY_TYPE_CB">Choose the E-Waste items you would want to bring in to a Mobile Collection point</string>
+    <string name="ITEM_INVENTORY_CB1">Pencil battery</string>
+    <string name="ITEM_INVENTORY_CB2">Wires</string>
+    <string name="ITEM_INVENTORY_CB3">Mobile Phone/MP3 Players</string>
+    <string name="ITEM_INVENTORY_CB4">Modems/Routers/Radio</string>
+    <string name="ITEM_INVENTORY_CB5">Keyboard/Mouse</string>
+    <string name="ITEM_INVENTORY_CB6">Monitor/Displays/TV</string>
+    <string name="ITEM_INVENTORY_CB7">Refrigerator/Washing Machine</string>
+    <string name="ITEM_INVENTORY_DONE_BTN">Update items</string>
 </resources>
